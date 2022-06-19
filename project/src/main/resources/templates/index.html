@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Event List</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"
+	rel="stylesheet">
+	
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<h1>Event List</h1>
+
+	<div>
+		<!-- 		<nobr>
+			<a th:href="@{/event/create}">Add Event</a> | <a
+				th:href="@{/event/getListEvents}">Back to Index</a>
+		</nobr> -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" th:href="@{/event/getListEvents}">
+				<img style="width:50px; height:50px" th:src="@{/image/logo.jpg}" />
+			</a>
+			<a class="navbar-brand" th:href="@{/event/create}">Add Event</a> <a
+				class="navbar-brand" th:href="@{/event/listMyEvents}">List My
+				Event</a> <a class="navbar-brand"
+				th:href="@{/event/getListEventsJoined}">List Events Joined</a> <a
+				class="navbar-brand" th:href="@{/event/getListEventsApproval}">List
+				Events Need Aprroval</a> <a class="navbar-brand"
+				th:href="@{/user/logout}">Logout</a>
+		</nav>
+	</div>
+	<br />
+	<br />
+	<div>
+		<table class="table table-hover table-striped" id="listEvents"
+			style="width: 100%">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Address</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Time Start</th>
+					<th>Time End</th>
+					<th>Number User Join</th>
+					<th>Join Event</th>
+					<th>Detail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="event : ${events}">
+					<td th:utext="${event.id}">...</td>
+					<td th:utext="${event.address}">...</td>
+					<td th:utext="${event.description}">...</td>
+					<td><img th:src="@{'' + ${event.image}}"
+						style="width: 100px; height: 50px" alt="" /></td>
+					<td th:utext="${event.name}">...</td>
+					<td th:utext="${#temporals.format(event.timeStart, 'dd-MMM-yyyy hh:mm:ss')}">...</td>
+					<td th:utext="${#temporals.format(event.timeEnd, 'dd-MMM-yyyy hh:mm:ss')}">...</td>
+					<td th:utext="${event.umberUserJoin}">...</td>
+
+					<!-- 					<button th:case="'0'" type="button" class="btn btn-primary">
+							<a th:href="@{/event/JoinEvents/{id}(id=${event.id})}" style="color: white; text-decoration: none;">Join Events</a>
+					</button> -->
+					<td>
+						<button type="button" class="btn btn-primary" th:attr="onclick=|joinEvents('${event.id}')|"  
+							data-bs-toggle="modal" data-bs-target="#modalJoinEvents">
+							Join Events</button>
+					</td>
+					<td><a th:href="@{/event/detailEvent/{id}(id=${event.id})}">Detail</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<br />
+	<div>
+		<nobr>
+			<!-- <span th:if="${hasPrev}"><a th:href="@{/contacts?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span> 
+                <span th:if="${hasNext}"><a th:href="@{/contacts?page={next}(next=${next})}">Next</a></span> -->
+		</nobr>
+	</div>
+	<!-- Modal -->
+	<div class="container">
+		<!-- Modal -->
+		<div class="modal fade" id="modalJoinEvents" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Join Events</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<form id="formEventJoins" th:object="${eventJoin}" method="POST">
+						<div class="modal-body">
+							<table border="0">
+								<div class="mb-3 row">
+									<label for="devicesContribute" class="col-sm-2 col-form-label">Devices
+										Contribute</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{contibuteDevices}"
+											class="form-control" id="devicesContribute">
+									</div>
+								</div>
+								<div class="mb-3 row">
+									<label for="number" class="col-sm-2 col-form-label">Number</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{numberContribute}"
+											class="form-control" id="number">
+									</div>
+								</div>
+							</table>
+							<!-- <input type="submit" th:value="${add} ? 'Create' : 'Update'" /> -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="Join Events" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+		integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#listEvents').DataTable();
+		});
+		
+		function joinEvents(idEvent) {
+			$('#formEventJoins').attr('action', '/event/joinEvents/' + idEvent);
+		}
+	</script>
+</body>
+</html>

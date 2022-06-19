@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${add} ? 'Create a Event' : 'Edit a Event'" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+</head>
+<body>
+	<h1 th:text="${add} ? 'Create a Event:' : 'Edit a Event:'" />
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" th:href="@{/event/getListEvents}">Back to
+			HomePage</a>
+	</nav>
+	<br />
+	<br />
+	<form id="formAddEvent" th:action="@{/event/addUpdateEvent}"
+		th:object="${event}" method="POST">
+		<table border="0">
+			<input type="hidden" th:field="*{id}" />
+			<!-- 			<tr>
+				<td>Address</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{address}" /></td>
+			</tr> -->
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Address</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{address}" class="form-control">
+				</div>
+			</div>
+			<!-- 			<tr>
+				<td>Description</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{description}" /></td>
+			</tr> -->
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{description}" class="form-control">
+				</div>
+			</div>
+			<!-- 			<tr>
+				<td>Image</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{image}" /></td>
+			</tr> -->
+			<div class="mb-3 row" style="width: 100%; display: -webkit-box;">
+				<label for="formFile" class="form-label">Image</label> 
+				<input style="width: 100px; height: 38px; margin-left: 61px;"
+					class="form-control" type="file" accept=".jpg, .png, .gif"
+					id="formFile"> <img id="imageId"
+					th:src="@{'' + ${event.image}}"
+					style="width: 100px; height: 50px" alt="" /> <input type="hidden"
+					id="imageEvent" name="imageEvent" th:field="*{image}">
+			</div>
+			<!-- 			<tr>
+				<td>Name</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{name}" size="50" /></td>
+			</tr> -->
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{name}" class="form-control">
+				</div>
+			</div>
+			<!-- 			<tr>
+				<td>Time Start</td>
+				<td></td>
+				<td><input type="date" th:field="*{timeStart}" /></td>
+			</tr> -->
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Time
+					Start</label>
+				<div class="col-sm-10">
+					<input type="datetime-local" th:field="*{timeStart}" class="form-control">
+				</div>
+			</div>
+			<!-- 			<tr>
+				<td>Time End</td>
+				<td></td>
+				<td><input type="date" th:field="*{timeEnd}" /></td>
+			</tr> -->
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Time
+					End</label>
+				<div class="col-sm-10">
+					<input type="datetime-local" th:field="*{timeEnd}" class="form-control">
+				</div>
+			</div>
+			<!-- 			<tr>
+				<td>Number User Join</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{umberUserJoin}" /></td>
+			</tr> -->
+			<div class="mb-3 row">
+				<label for="inputPassword" class="col-sm-2 col-form-label">Number
+					User Join</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{umberUserJoin}" class="form-control">
+				</div>
+			</div>
+		</table>
+		<!-- <input type="submit" th:value="${add} ? 'Create' : 'Update'" /> -->
+		<input type="submit" class="btn btn-primary"
+			th:value="${add} ? 'Create' : 'Update'" />
+	</form>
+
+	<br />
+	<!-- Check if errorMessage is not null and not empty -->
+	<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		window.onload = function(e) {
+			if (window.File && window.FileReader && window.FileList
+					&& window.Blob) {
+				//alert('File API supported.!');
+				document.getElementById('formFile').addEventListener("change", convertImage, false);
+			} else {
+				console.log('The File API not supported by this browser.');
+			}
+		};
+
+		function convertImage() {
+			var fileInput = document.getElementById('formFile');
+
+			var reader = new FileReader();
+			reader.readAsDataURL(fileInput.files[0]);
+
+			reader.onload = function() {
+				console.log(reader.result);//base64encoded string
+				document.getElementById("imageEvent").value = reader.result;
+				document.getElementById("imageId").src = reader.result;
+			};
+			reader.onerror = function(error) {
+				console.log('Error: ', error);
+			};
+		}
+	</script>
+</body>
+</html>

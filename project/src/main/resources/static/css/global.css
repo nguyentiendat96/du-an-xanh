@@ -1,0 +1,79 @@
+body {
+	 line-height: 1;
+	 font-family: 'Montserrat', sans-serif;
+	 color: #fff;
+	 font-weight: 500;
+	 background-color: white;
+}
+ button {
+	 cursor: pointer;
+	 outline: none;
+	 border: none;
+	 font-family: 'Montserrat', sans-serif;
+}
+ .wrapper {
+	 margin: 0 auto;
+}
+ .container {
+	 max-width: 1410px;
+	 margin: 0 auto;
+	 padding: 0 15px;
+}
+ .button {
+	 display: inline-block;
+	 padding: 10px 36px;
+	 border-radius: 100rem;
+	 font-family: 'Montserrat', sans-serif;
+	 line-height: 1;
+	 font-size: 14px;
+	 cursor: pointer;
+	 border: none;
+	 outline: none;
+	 text-align: center;
+	 white-space: nowrap;
+	 font-weight: 700;
+}
+ .button--primary {
+	 background-color: white;
+	 color: #489c20;
+}
+ .button--outline {
+	 background-color: transparent;
+	 color: #fff;
+	 font-weight: 500;
+	 border: 1px solid #fff;
+}
+ .button--rounded {
+	 border-radius: 10px;
+	 padding: 17px 65px;
+}
+ .heading {
+	 font-weight: 700;
+	 font-size: 40px;
+	 line-height: calc(57 / 40);
+	 color: #fff;
+}
+ .heading-small {
+	 font-weight: 700;
+	 font-size: 16px;
+	 line-height: calc(24 / 16);
+	 color: #fff;
+}
+ .text {
+	 font-weight: 500;
+	 font-size: 14px;
+	 line-height: calc(20 / 14);
+	 color: #fff;
+}
+ .text-small {
+	 font-size: 14px;
+	 line-height: calc(24 / 14);
+	 color: #fff;
+	 font-weight: 600;
+}
+ .boxed {
+	 max-width: 864px;
+	 margin-left: auto;
+	 margin-right: auto;
+	 text-align: center;
+}

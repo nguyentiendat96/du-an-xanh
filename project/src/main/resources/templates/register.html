@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/appmain.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/register.css}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <section style="padding: 10px; font-family: sans-serif;" class="header-lienhe">
+                <span style="margin-left: 190px;" class="header-lienhe-ten">Trả lại màu xanh</span>
+
+            </section>
+            <section class="header-container" style="margin-bottom: 0">
+                <a th:href="@{/user/information}">
+                    <img class="header-images" src="../image/logo.jpg" alt="#">
+                </a>
+                <ul class="menu">
+                    <div class="menu-list">
+                        <li class="menu-item">
+                            <a th:href="@{/user/information}" class="menu-link">Thông tin chung</a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/user/net}" class="menu-link">Mạng lưới xanh</a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/user/conect}" class="menu-link">Kết nối xanh</a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/user/experience}" class="menu-link">Trải nghiệm xanh</a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/event/listMyEvents}" class="menu-link">Event</a>
+                        </li>
+                    </div>
+                    <div class="menu-card">
+                        <li class="menu-item">
+                            <a href="#" class="menu-link"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/user/register}" class="menu-link">
+                                <i class="fa-solid fa-user"></i>
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </section>
+
+        </header>
+
+        <main style="padding-top:0; background: white;">
+            <section class="slogan">
+                <div class="container">
+                    <div class="slogan-title">
+                        <h1 class="slogan-content" style="color:white ;">Đăng Ký Thành Viên</h1>
+                    </div>
+                </div>
+
+            </section>
+            <section class="register">
+                <div class="container">
+                    <h2>Đăng ký thành viên</h2>
+                    <form class="register-form w3-container w3-card-4 w3-light-grey"
+                          th:action="@{/user/registration}" th:object="${user}" method="post">
+                        <div class="register-row">
+                            <label class="register-title">Tài khoản</label>
+                            <input placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round" name="first" type="text">
+                        </div>
+                        <div class="register-row">
+                            <label class="register-title">Họ tên</label>
+                            <input placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round-large" name="last" type="text">
+                        </div>
+
+
+                        <div class="register-row">
+                            <label class="register-title">Địa chỉ</label>
+                            <input th:field="*{address}" placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round-xxlarge" name="last" type="text">
+                        </div>
+                        <div class="register-row">
+                            <label class="register-title">Email</label>
+                            <input th:field="*{email}" placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round-xxlarge" name="last" type="email">
+                        </div>
+                        <div class="register-row">
+                            <label class="register-title">Số điện thoại</label>
+                            <input th:field="*{numberPhone}" placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round-xxlarge" name="last" type="text">
+                        </div>
+                        <div class="register-row">
+                            <label class="register-title">Mật Khẩu</label>
+                            <input th:field="*{password}" placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round-xxlarge" name="last" type="password">
+                        </div>
+                        <button type="submit" class="register-button">Đăng Ký</button>
+                    </form>
+                </div>
+
+            </section>
+        </main>
+        <footer>
+            <section class="footer">
+                <div class="container">
+                    <div class="footer-container">
+                        <div class="footer-top">
+                            <span class="footer-content">“Sống xanh” được hiểu nôm na là lối sống lành mạnh, thân thiện
+                                với môi trường. Đối với
+                                trẻ em, tùy theo độ tuổi mà cha
+                                mẹ tìm hiểu và dạy cho con thói quen sống phù hợp, tích cực, thân thiện với thiên nhiên
+                                và góp phần bảo vệ môi trường..</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="footer-bottom">
+                <div class="container">
+                    <div class="footer-bottom-chinh">
+                        <span class="footer-bottom-left">©2021 EMCLAB JSC Copyright</span>
+                        <div class="footer-bottom-right">
+                            <i class="fa-brands fa-facebook"></i>
+                            <i class="fa-brands fa-instagram"></i>
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+        </footer>
+    </div>
+
+
+</body>
+
+</html>

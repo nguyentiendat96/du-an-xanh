@@ -1,0 +1,80 @@
+.form {
+	 background-color: white;
+	 width: 100%;
+}
+ .form-info {
+	 padding: 40px 50px 40px 0;
+}
+ .form-container {
+	 transform: translateY(-50%);
+}
+ .form-title {
+	 color: black;
+}
+ .form-book {
+	 display: flex;
+	 justify-content: space-between;
+	 align-items: stretch;
+	 gap: 0 50px;
+	 background-color: white;
+}
+ .form-book img {
+	 width: 100%;
+	 height: 100%;
+	 object-fit: cover;
+}
+ .form-desc {
+	 max-width: 688px;
+}
+ .form-desc label {
+	 color: black;
+	 display: block;
+	 font-weight: 600;
+	 font-size: 14px;
+	 line-height: calc(24 / 14);
+	 margin-bottom: 10px;
+}
+ .form-desc input {
+	 display: block;
+	 width: 100%;
+	 margin-bottom: 12px;
+	 padding: 15px;
+	 font-size: 14px;
+	 font-weight: 400;
+	 line-height: calc(28 / 14);
+	 color: blue;
+	 background-color: #ededed;
+	 border: 1px solid #ededed;
+}
+ .form-button {
+	 margin-top: 50px;
+	 border-radius: 5px;
+	 padding: 20px 0;
+	 width: 100%;
+}
+ @media screen and (max-width: 767px) {
+	 .form {
+		 position: relative;
+		 padding-bottom: 40px;
+	}
+	 .form .container {
+		 padding: 0;
+	}
+	 .form-book {
+		 display: flex;
+		 flex-direction: column;
+		 grid-gap: 50px 0;
+	}
+	 .form-container {
+		 transform: translateY(0);
+	}
+	 .form-info {
+		 padding: 0 50px;
+	}
+	 .form-image {
+		 height: 300px;
+	}
+	 .form-image img {
+		 height: 100%;
+	}
+}
