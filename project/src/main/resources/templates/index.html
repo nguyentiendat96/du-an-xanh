@@ -50,10 +50,8 @@
 		</nav>
 	</div>
 	<br />
-	<br />
 	<div>
-		<table class="table table-hover table-striped" id="listEvents"
-			style="width: 100%">
+		<table class="table table-dark" id="listEvents" style="width: 100%">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -74,7 +72,7 @@
 					<td th:utext="${event.address}">...</td>
 					<td th:utext="${event.description}">...</td>
 					<td><img th:src="@{'' + ${event.image}}"
-						style="width: 100px; height: 50px" alt="" /></td>
+						style="width: 100px; height: 50px" alt=""  src=""/></td>
 					<td th:utext="${event.name}">...</td>
 					<td th:utext="${#temporals.format(event.timeStart, 'dd-MMM-yyyy hh:mm:ss')}">...</td>
 					<td th:utext="${#temporals.format(event.timeEnd, 'dd-MMM-yyyy hh:mm:ss')}">...</td>

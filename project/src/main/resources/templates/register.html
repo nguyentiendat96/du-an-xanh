@@ -98,7 +98,12 @@
                             <label class="register-title">Mật Khẩu</label>
                             <input th:field="*{password}" placeholder="mời nhập" class="register-nhap w3-input w3-border w3-round-xxlarge" name="last" type="password">
                         </div>
-                        <button type="submit" class="register-button">Đăng Ký</button>
+                        <div>
+                            <button type="submit" class="register-button">Đăng Ký</button>
+                        </div>
+                        <div th:if="${#fields.hasErrors('global')}">
+                            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" style="color: red;"></p>
+                        </div>
                     </form>
                 </div>
 

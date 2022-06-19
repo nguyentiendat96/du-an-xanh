@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -93,11 +94,13 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registerUserAccount(@ModelAttribute("user") User user) {
+    public String registerUserAccount(@ModelAttribute("user") User user, BindingResult result) {
         System.out.println("registration");
         User existing = userRepository.findByEmail(user.getEmail());
         if (existing != null) {
-//			  System.out.println("email" "There is already an account registered with that email");
+            result.addError(new ObjectError("globalError" , "There is already an account registered with that email"));
+        }
+        if (result.hasErrors()) {
             return "register";
         }
         Role role = roleRepository.findByNameRole("ROLE_MEMBER");
